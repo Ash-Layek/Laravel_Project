@@ -20,13 +20,17 @@ class CategoryController extends Controller
     public function createCategory(Request $request){
 
 
- 
-         
-        
-
        
+        
+     Validator::make($request->all(), [
 
-    $validate = Validator::make($request->all(), [
+        'name' => 'required'
+    
+
+
+    ],['name.required' => 'Required'])->validate();
+
+     Validator::make($request->all(), [
 
         'name' => 'unique:category_lists,name'
     
@@ -80,6 +84,7 @@ class CategoryController extends Controller
 
     }
 
+ 
 
 
     public function editCategory(Request $request){
@@ -87,12 +92,61 @@ class CategoryController extends Controller
 
         
      $data = $request->get('nameData');
+     $id = $request->get('idData');
+
+     $totaldata = [$data, $id];
 
 
 
 
       
-     return  view('formData')->with('data',$data);
+   
+     
+     return  view('formData')->with('data',$totaldata,);
+
+
+    }
+
+
+    public function sendCategory($id, Request $request){
+
+
+
+
+
+
+
+
+$categories = categoryList::find($id);
+
+
+ 
+
+    if (categoryList::where('name',$request->get('name'))->exists()){
+
+        return 'DEJA F DB A ZBI';
+         
+
+    } else { 
+          $categories->name = $request->get('name');
+
+
+          $categories->update();
+
+          return 'Added to database';
+    }
+
+         
+    //    categoryList::where('name',$name)->update(['name'=>$$name]);
+
+
+    }
+
+    
+
+    
+
+
 
 
     }
@@ -107,4 +161,4 @@ class CategoryController extends Controller
 
 
  
-}
+

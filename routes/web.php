@@ -16,7 +16,9 @@ use App\Http\Controllers\CategoryController;
 
 Route::get('categories/create', function () {
     return view('form');
-});
+})->name('initialCreate');
+
+
 
 
 Route::post('categories', [CategoryController::class, 'createCategory'])->name('createCategory');
@@ -27,6 +29,12 @@ Route::post('categories', [CategoryController::class, 'createCategory'])->name('
 
 
 Route::post('categories/{id}/edit', [CategoryController::class, 'editCategory'])->name('editCategory');
+
+
+Route::patch('categories/{id}', [CategoryController::class, 'sendCategory'])->name('sendCategory');
+
+
+
 
 
 
