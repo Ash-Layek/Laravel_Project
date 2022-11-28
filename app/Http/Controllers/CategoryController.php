@@ -86,12 +86,13 @@ class CategoryController extends Controller
 
 
         
-     return "LHWAAAAAAAAAAAAAA";
+     $data = $request->get('nameData');
 
 
 
 
       
+     return  view('formData')->with('data',$data);
 
 
     }
