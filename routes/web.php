@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\itemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,13 @@ Route::post('categories/{id}/edit', [CategoryController::class, 'editCategory'])
 
 
 Route::patch('categories/{id}', [CategoryController::class, 'sendCategory'])->name('sendCategory');
+
+
+Route::get('items/create', [itemController::class, 'createItem']);
+
+Route::post('items', [itemController::class, 'Validation'])->name('Validation');
+
+
 
 
 
