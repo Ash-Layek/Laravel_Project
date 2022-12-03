@@ -9,7 +9,7 @@
 
        <p style="color :red"> {{$errors}} </p>
 
-        <form action="{{route('Validation')}}" method="post">
+        <form action="{{route('Validation')}}" method="post" enctype="multipart/form-data">
         {{csrf_field()}}
 
       
@@ -25,8 +25,8 @@
          <input type="text" name="quantity" value="{{old('quantity')}}"></br>
          <label for="sku" >SKU : </label>
          <input type="text" name="sku" value="{{old('sku')}}"></br>
-         <label for="picture" >PICTURE : </label>
-         <input type="file" name="picture" value=""></br>
+         <label for="file" >PICTURE : </label>
+         <input type="file" name="file" value=""></br>
   
          <button type="submit" >Submit </button>
 

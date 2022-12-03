@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\itemlist;
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Facades\Storage;
+
+use Intervention\Image\Facades\Image as Image;
+
+use Illuminate\Http\File;
 
 class itemController extends Controller
 {
@@ -39,7 +44,9 @@ class itemController extends Controller
         
         'sku' => 'required',
 
-        'picture' => 'required',
+        'file' => 'required|mimes:png,jpeg,jpg'
+
+        
        
 
     ],['required' => 'Required'])->validate();
@@ -68,6 +75,7 @@ class itemController extends Controller
 
      
 
+     
 
      
 
@@ -76,19 +84,33 @@ class itemController extends Controller
        
         Storage::disk('local')->makeDirectory('images');
 
-        Storage::disk('local/images')->put('file.png', $request->file('picture'));
+
+       $request->file('file')->store('public/images/');
+
+/*
+        if ($request->hasFile('picture')){
+
+
+
+                 $file = $request->file('image');
+
+                $filename = $file->getClientOriginalName();
+
+
+                $file->storeAs('local/images', $filename);
+
+
+                return 'FILE T UPLOADA';
+            
+        }
+
+
+
+      */
 
      
 
     
-
-
-    
-
-
-
-
-
 
 }
 
