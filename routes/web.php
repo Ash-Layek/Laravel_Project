@@ -39,6 +39,12 @@ Route::get('items/create', [itemController::class, 'createItem']);
 
 Route::post('items', [itemController::class, 'Validation'])->name('Validation');
 
+Route::post('items/{id}/edit', [itemController::class, 'editItem'])->name('editItem');
+
+Route::patch('items/{id}', [itemController::class, 'updateItem'])->name('updateItem');
+
+
+
 
 
 

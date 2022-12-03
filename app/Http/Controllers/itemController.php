@@ -24,6 +24,134 @@ class itemController extends Controller
     }
 
 
+    public function editItem($id,Request $request){
+
+
+        switch($request->input('action')){
+
+
+
+            case 'DELETEE':
+
+            
+
+              $item = itemList::find($id);
+
+
+              $item->delete();
+
+
+              if (itemList::find($id)){
+
+
+                return "FUCK MAZAL KAYN";
+
+              } else {
+
+
+
+                return "DELETED FROM DATABASE";
+
+                
+              }
+
+
+              
+
+        
+                
+
+
+            case 'EDIT':
+
+                
+        $id = $request->get('idData');
+        $title = $request->get('titleData');
+        $description = $request->get('descriptionData');
+        $price = $request->get('priceData');
+        $quantity = $request->get('quantityData');
+        $sku = $request->get('skuData');
+
+
+          $data = [$id, $title,$description,$price,$quantity,$sku];
+
+
+          return view('edit-item')->with("data", $data);
+
+
+        }
+
+    
+        
+
+
+
+    }
+
+    public function deleteItem($id,Request $request){
+
+
+
+
+       
+
+
+
+
+
+    }
+
+
+
+    public function updateItem($id,Request $request){
+
+
+        Validator::make($request->all(),[
+
+            'id' => 'required',
+            
+            'title' => 'required',
+
+            'description' => 'required',
+           
+            'price' => 'required',
+           
+            'quantity' => 'required',
+            
+            'sku' => 'required',
+    
+    
+        ],['required' => 'field should not be empty'])->validate();
+
+
+    
+
+        $items = itemlist::find($id);
+
+
+ 
+
+    if (itemlist::where('title',$request->get('title'))->exists()){
+
+        return 'Item already  in db';
+         
+
+    } else { 
+          $items->title = $request->get('title');
+          $items->description = $request->get('description');
+          $items->price = $request->get('price');
+          $items->quantity = $request->get('quantity');
+          $items->sku = $request->get('sku');
+
+          $items->update();
+
+          return 'Added to database';
+    }
+
+
+    }
+
+
 
     public function Validation(Request $request){
 
@@ -51,6 +179,15 @@ class itemController extends Controller
 
     ],['required' => 'Required'])->validate();
 
+
+    Validator::make($request->all(), [
+
+        'title' => 'unique:itemlists,title',
+        'id' => 'unique:itemlists,id',
+    
+
+
+    ],['name.unique' => 'Already in Database'])->validate();
 
 
 
@@ -86,6 +223,15 @@ class itemController extends Controller
 
 
        $request->file('file')->store('public/images/');
+
+
+
+       $data = itemlist::all();
+
+
+       return view('item-list', ['items' => $data]);
+
+
 
 /*
         if ($request->hasFile('picture')){

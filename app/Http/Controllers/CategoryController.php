@@ -113,6 +113,14 @@ class CategoryController extends Controller
 
 
 
+               
+     Validator::make($request->all(), [
+
+        'name' => 'required'
+    
+
+
+    ],['name.required' => 'Required'])->validate();
 
 
 
@@ -124,7 +132,7 @@ $categories = categoryList::find($id);
 
     if (categoryList::where('name',$request->get('name'))->exists()){
 
-        return 'DEJA F DB A ZBI';
+        return 'Already in db';
          
 
     } else { 
