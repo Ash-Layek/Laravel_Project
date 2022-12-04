@@ -26,7 +26,7 @@
 <input type="hidden" name="skuData" value={{$data['sku']}} </br>
 
 
-<td> {{$data['title']}} <input type="submit" name="action" value="EDIT"></button> <input type="submit"  name="action" value="DELETEE"></button></td>
+<td> {{$data['title']}} <input type="submit" name="action" value="EDIT"></button><a  onclick="return confirm('Are you sure you want to delete this item?')"> <input type="submit"  name="action" value="DELETEE" onClick=></button>  </a> </td>
 
 
 
