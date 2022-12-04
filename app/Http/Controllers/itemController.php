@@ -44,13 +44,17 @@ class itemController extends Controller
               if (itemList::find($id)){
 
 
-                return "FUCK MAZAL KAYN";
+                return "NOT DELETED STILL IN DB";
 
               } else {
 
 
+                   $items = itemList::all();
 
-                return "DELETED FROM DATABASE";
+
+
+                   return view('item-list', ["items"=>$items]);
+                
 
                 
               }
@@ -88,19 +92,7 @@ class itemController extends Controller
 
     }
 
-    public function deleteItem($id,Request $request){
-
-
-
-
-       
-
-
-
-
-
-    }
-
+    
 
 
     public function updateItem($id,Request $request){
